@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import BackgroundImage from '../../assets/BackgroundLogin.jpg';
 import { FaHome } from 'react-icons/fa';
 import Logo from '../../assets/Artesanías.png';
 import { useEmpresa } from '../../Context/contextEmpresa'; // Importa el hook para usar el contexto
-
 
 export const LoginCompanies = () => {
     const [nombre, setNombre] = useState('');
@@ -14,6 +13,14 @@ export const LoginCompanies = () => {
     
     const navigate = useNavigate();
     const { setEmpresas } = useEmpresa(); // Obtén setEmpresas desde el contexto
+
+    useEffect(() => {
+        // Obtener el ID del administrador del localStorage
+        const storedId = localStorage.getItem('userId');
+        if (storedId) {
+            setIdAdministrador(storedId);
+        }
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -114,20 +121,7 @@ export const LoginCompanies = () => {
                             required
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-black text-sm font-bold mb-2" htmlFor="idadministrador">
-                            ID Administrador
-                        </label>
-                        <input
-                            type="number"
-                            id="idadministrador"
-                            value={idadministrador}
-                            onChange={(e) => setIdAdministrador(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-darkyellow leading-tight focus:outline-none focus:shadow-outline"
-                            placeholder="ID Administrador"
-                            required
-                        />
-                    </div>
+                    {/* El campo ID Administrador se ha eliminado del formulario */}
                     <div className="flex items-center justify-center">
                         <button
                             type="submit"
