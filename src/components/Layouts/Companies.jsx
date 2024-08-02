@@ -61,27 +61,26 @@ export const Companies = () => {
             <div className="flex flex-col min-h-screen bg-gray-200">
                 <Header />
                 <div className="container mx-auto my-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                    <div className="bg-white border rounded-lg overflow-hidden shadow-md flex flex-col items-center p-4 cursor-pointer">
-                        <div className="flex flex-col items-center">
-                            <input
-                                type="checkbox"
-                                checked={true}
-                                readOnly
-                                className="mb-2"
-                            />
-                            <span className="text-black text-sm text-center">Sus locales / Empresas se mostrarán aquí</span>
+                    {empresas.length === 0 ? (
+                        <div className="bg-white border rounded-lg overflow-hidden shadow-md flex flex-col items-center p-4 cursor-pointer">
+                            <div className="flex flex-col items-center">
+                                <span className="text-black text-sm text-center">No hay empresas para mostrar</span>
+                            </div>
                         </div>
-                    </div>
-                    {empresas.map(empresa => (
-                        <div
-                            key={empresa.codigoempresa}
-                            className="bg-white border rounded-lg overflow-hidden shadow-md cursor-pointer flex flex-col items-center p-4"
-                            onClick={() => viewEmpresa(empresa.codigoempresa)}
-                        >
-                            <h3 className="text-lg font-semibold mb-2 text-center">{empresa.nombre}</h3>
-                            <p className="text-center">{empresa.direccion}</p>
-                        </div>
-                    ))}
+                    ) : (
+                        empresas.map(empresa => (
+                            <div
+                                key={empresa.id}
+                                className="bg-white border rounded-lg overflow-hidden shadow-md cursor-pointer flex flex-col items-center p-4"
+                                onClick={() => viewEmpresa(empresa.id)}
+                            >
+                                <h3 className="text-lg font-semibold mb-2 text-center">{empresa.nombre}</h3>
+                                <p className="text-center underline text-darkyellow">{empresa.direccion}</p>
+                                <p className="text-center line-clamp-5">{empresa.descripcion}</p>
+                                <p className="text-center text-gray-600">ID: {empresa.codigoempresa}</p>
+                            </div>
+                        ))
+                    )}
                     <div className="bg-white border rounded-lg overflow-hidden shadow-md flex flex-col items-center p-4 cursor-pointer">
                         <div className="flex flex-col items-center" onClick={() => navigate('/LoginCompanies')}>
                             <svg
