@@ -1,3 +1,4 @@
+// src/Context/contextEmpresa.js
 import React, { createContext, useState, useContext } from 'react';
 
 // Crea el contexto
